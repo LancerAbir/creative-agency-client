@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const SingleService = ({ service }) => {
    return (
       <div className="col-md-4 col-sm-6 col-12">
-         <Link to="/order">
+         <Link to={"/order/" + service._id}>
             <div className="single-service">
                {service.image ? (
                   <img

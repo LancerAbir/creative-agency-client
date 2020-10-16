@@ -47,7 +47,7 @@ const AddService = () => {
       <div className="board-bg">
          <div className="container-fluid">
             <div className="row">
-               {/** Sudebar */}
+               {/** SideBar */}
                <AdminSidebar></AdminSidebar>
                <div className="col-md-9">
                   <div className="admin-content">

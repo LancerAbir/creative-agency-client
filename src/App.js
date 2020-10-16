@@ -33,26 +33,26 @@ function App() {
                   <Route exact path="/contactUs" component={ContactUs} />
                   <Route exact path="/adminLogin" component={AdminLogin} />
                   <Route exact path="/userLogin" component={UserLogin} />
-                  <Route path="/order">
+                  <PrivateRoute path="/order/:SingleOrderKey">
                      <Order></Order>
-                  </Route>
-                  <Route path="/serviceList">
+                  </PrivateRoute>
+                  <PrivateRoute path="/serviceList">
                      <ServiceList></ServiceList>
-                  </Route>
-                  <Route path="/review">
+                  </PrivateRoute>
+                  <PrivateRoute path="/review">
                      <Review></Review>
-                  </Route>
+                  </PrivateRoute>
 
                   {/**  PrivateRoute  */}
-                  <Route path="/allUser">
+                  <PrivateRoute path="/allUser">
                      <AllUser></AllUser>
-                  </Route>
-                  <Route path="/addService">
+                  </PrivateRoute>
+                  <PrivateRoute path="/addService">
                      <AddService></AddService>
-                  </Route>
-                  <Route path="/makeAdmin">
+                  </PrivateRoute>
+                  <PrivateRoute path="/makeAdmin">
                      <MakeAdmin></MakeAdmin>
-                  </Route>
+                  </PrivateRoute>
                   <Route path="*" component={NotFound} />
                </Switch>
             </BrowserRouter>

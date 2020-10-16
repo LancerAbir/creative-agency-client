@@ -6,7 +6,15 @@ const SingleServiceList = ({ service }) => {
          <div className="user-table">
             <div className="card-box">
                <div className="card-icon d-flex">
-                  <img src={service.serviceImg} alt="" />
+                  {service.image ? (
+                     <img
+                        src={`data:image/png;base64,${service.image.img}`}
+                        alt={service.title}
+                     />
+                  ) : (
+                     <img src={`http://localhost:7000/${service.img}`} alt="" />
+                  )}
+
                   <button className="btn ml-auto">pending</button>
                </div>
                <h2>{service.title}</h2>

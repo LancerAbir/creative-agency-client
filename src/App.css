@@ -136,6 +136,7 @@ button.section-btn:hover {
 .single-service img {
    max-width: 74px;
    height: 74px;
+   border-radius: 50px;
 }
 .single-service {
    font-weight: 300;
@@ -520,7 +521,7 @@ label.image-upload span {
    background-color: #e5e5e5;
 }
 .footer-section label.image-upload {
-   padding: 21px 97px;
+   padding: 21px 75px;
 }
 .card-icon img {
    width: 72px;
@@ -557,6 +558,11 @@ button.btn.ml-auto {
    border: none;
    margin-right: 65px;
 }
+.footer-section input.form-control,
+.footer-section textarea.form-control {
+   color: #000;
+}
+
 /*! ~~~~~~˚∆˚~~~~~~ Responsive CSS ~~~~~~˚∆˚~~~~~~ */
 @media only screen and (max-width: 992px) {
    .logo img {

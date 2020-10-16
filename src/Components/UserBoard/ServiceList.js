@@ -7,31 +7,21 @@ import UserSidebar from "./UserSidebar";
 import serviceImg01 from "../../images/icons/service1.png";
 import serviceImg02 from "../../images/icons/service2.png";
 import serviceImg03 from "../../images/icons/service3.png";
+import { useEffect } from "react";
 
 const ServiceList = () => {
    //** Data Come Form Context API */
    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
 
-   const [servicedata, setServicedata] = useState([
-      {
-         serviceImg: serviceImg01,
-         title: "Web & Mobile design",
-         description:
-            "We craft stunning and amazing web UI, using a well drrafted UX to fit your product.",
-      },
-      {
-         serviceImg: serviceImg02,
-         title: "Graphic design",
-         description:
-            "We craft stunning and amazing web UI, using a well drrafted UX to fit your product.",
-      },
-      {
-         serviceImg: serviceImg03,
-         title: "Web Development",
-         description:
-            "We craft stunning and amazing web UI, using a well drrafted UX to fit your product.",
-      },
-   ]);
+   //** Get Data From Server */
+   const [serviceData, setServiceData] = useState([]);
+   useEffect(() => {
+      fetch("http://localhost:7000/sService")
+         .then((res) => res.json())
+         .then((data) => {
+            setServiceData(data);
+         });
+   }, []);
 
    return (
       <div className="board-bg">
@@ -57,7 +47,7 @@ const ServiceList = () => {
                      <div className="admin-content auth-bg">
                         <div className="all-user-box">
                            <div className="row">
-                              {servicedata.map((service) => (
+                              {serviceData.map((service) => (
                                  <SingleServiceList
                                     service={service}
                                  ></SingleServiceList>
