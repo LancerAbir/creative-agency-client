@@ -12,12 +12,12 @@ const ServiceList = () => {
    //** Get Data Come From Server */
    const [serviceData, setServiceData] = useState([]);
    useEffect(() => {
-      fetch("http://localhost:7000/sService")
+      fetch("http://localhost:7000/sService?email=" + loggedInUser.email)
          .then((res) => res.json())
          .then((data) => {
             setServiceData(data);
          });
-   }, []);
+   }, [serviceData]);
 
    return (
       <div className="board-bg">

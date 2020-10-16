@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { UserContext } from "../../App";
 import AdminSidebar from "./AdminSidebar";
 import uploadIcon from "../../images/icons/cloud-upload-outline 1.png";
@@ -43,101 +43,138 @@ const AddService = () => {
          });
    };
 
+   //** Get Data Come From Server */
+   const [admin, setAdmin] = useState([]);
+   useEffect(() => {
+      fetch("http://localhost:7000/admin")
+         .then((res) => res.json())
+         .then((data) => {
+            setAdmin(data);
+         });
+   }, []);
+   const pureAdmin = admin.map((add) => add.email);
+   const originalAdmin = pureAdmin.toString();
+
    return (
       <div className="board-bg">
          <div className="container-fluid">
             <div className="row">
                {/** SideBar */}
                <AdminSidebar></AdminSidebar>
-               <div className="col-md-9">
-                  <div className="admin-content">
-                     <div className="upper-bar d-flex justify-content-between">
-                        <h3 className="admin-page-title">Add Service</h3>
-                        {loggedInUser.email && (
-                           <h6>
-                              <img
-                                 className="rounded-circle"
-                                 src={loggedInUser.photo}
-                                 alt=""
-                              />
-                              {loggedInUser.fastName}
-                           </h6>
-                        )}
-                     </div>
-                     <div className="admin-content auth-bg">
-                        <div className="all-user-box">
-                           <div className="user-table">
-                              {/** Table Form */}
-                              <form>
-                                 <div className="form-row">
-                                    <div className="form-group col-md-6">
-                                       <label htmlFor="inputEmail4">
-                                          Service Title
-                                       </label>
-                                       <input
-                                          type="text"
-                                          required
-                                          onBlur={handleBlur}
-                                          name="title"
-                                          className="form-control"
-                                          placeholder="Enter Title"
-                                       />
-                                    </div>
-                                    {/** Image Upload */}
-                                    <div className="form-group col-md-6">
-                                       <label htmlFor="inputPassword4">
-                                          Icon
-                                       </label>
-                                       <br />
-                                       <input
-                                          type="file"
-                                          onChange={handlerFileChange}
-                                          required
-                                          name="file-2[]"
-                                          id="file-2"
-                                          className="inputfile inputfile-2"
-                                          data-multiple-caption="{count} files selected"
-                                          multiple=""
-                                       />
-                                       <label
-                                          className="image-upload"
-                                          htmlFor="file-2"
-                                       >
-                                          <img src={uploadIcon} alt="" />
-                                          <span>Upload Icon </span>
-                                       </label>
+               {loggedInUser.email != originalAdmin ? (
+                  <div className="col-md-9">
+                     <div className="admin-content">
+                        <div className="admin-content auth-bg">
+                           <div className="all-user-box">
+                              <div className="user-table text-center">
+                                 <div className="jumbotron jumbotron-fluid">
+                                    <div className="container">
+                                       <h1 className="display-4">
+                                          You Are Not a Admin
+                                       </h1>
+                                       <p className="lead">
+                                          Only admin can enter the secret page.
+                                          No one but admin can access this page,
+                                          Admin can make you administrator
+                                       </p>
                                     </div>
                                  </div>
-                                 <div className="form-row">
-                                    <div className="form-group col-md-6">
-                                       <label htmlFor="inputAddress">
-                                          Description
-                                       </label>
-                                       <textarea
-                                          style={{ height: "121px" }}
-                                          type="textarea"
-                                          required
-                                          onBlur={handleBlur}
-                                          className="form-control"
-                                          name="description"
-                                          placeholder="Enter Description"
-                                       />
-                                    </div>
-                                 </div>
-                              </form>
+                              </div>
                            </div>
-                           {/** Submit Button */}
-                           <button
-                              onClick={() => handleSubmit()}
-                              type="submit"
-                              className="add-submit btn btn-primary ml-auto"
-                           >
-                              Submit
-                           </button>
                         </div>
                      </div>
                   </div>
-               </div>
+               ) : (
+                  <div className="col-md-9">
+                     <div className="admin-content">
+                        <div className="upper-bar d-flex justify-content-between">
+                           <h3 className="admin-page-title">Add Service</h3>
+                           {loggedInUser.email && (
+                              <h6>
+                                 <img
+                                    className="rounded-circle"
+                                    src={loggedInUser.photo}
+                                    alt=""
+                                 />
+                                 {loggedInUser.fastName}
+                              </h6>
+                           )}
+                        </div>
+                        <div className="admin-content auth-bg">
+                           <div className="all-user-box">
+                              <div className="user-table">
+                                 {/** Table Form */}
+                                 <form>
+                                    <div className="form-row">
+                                       <div className="form-group col-md-6">
+                                          <label htmlFor="inputEmail4">
+                                             Service Title
+                                          </label>
+                                          <input
+                                             type="text"
+                                             required
+                                             onBlur={handleBlur}
+                                             name="title"
+                                             className="form-control"
+                                             placeholder="Enter Title"
+                                          />
+                                       </div>
+                                       {/** Image Upload */}
+                                       <div className="form-group col-md-6">
+                                          <label htmlFor="inputPassword4">
+                                             Icon
+                                          </label>
+                                          <br />
+                                          <input
+                                             type="file"
+                                             onChange={handlerFileChange}
+                                             required
+                                             name="file-2[]"
+                                             id="file-2"
+                                             className="inputfile inputfile-2"
+                                             data-multiple-caption="{count} files selected"
+                                             multiple=""
+                                          />
+                                          <label
+                                             className="image-upload"
+                                             htmlFor="file-2"
+                                          >
+                                             <img src={uploadIcon} alt="" />
+                                             <span>Upload Icon </span>
+                                          </label>
+                                       </div>
+                                    </div>
+                                    <div className="form-row">
+                                       <div className="form-group col-md-6">
+                                          <label htmlFor="inputAddress">
+                                             Description
+                                          </label>
+                                          <textarea
+                                             style={{ height: "121px" }}
+                                             type="textarea"
+                                             required
+                                             onBlur={handleBlur}
+                                             className="form-control"
+                                             name="description"
+                                             placeholder="Enter Description"
+                                          />
+                                       </div>
+                                    </div>
+                                 </form>
+                              </div>
+                              {/** Submit Button */}
+                              <button
+                                 onClick={() => handleSubmit()}
+                                 type="submit"
+                                 className="add-submit btn btn-primary ml-auto"
+                              >
+                                 Submit
+                              </button>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               )}
             </div>
          </div>
       </div>

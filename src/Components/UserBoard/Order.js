@@ -13,7 +13,6 @@ const Order = () => {
       setSingleData,
    } = useContext(UserContext);
 
-   console.log(singleData);
    //** Logged User Info */
    const loggedName = loggedInUser.email && loggedInUser.fastName;
    const loggedEmail = loggedInUser.email && loggedInUser.email;
@@ -38,13 +37,13 @@ const Order = () => {
    const [register, setRegister] = useState({});
    const { SingleOrderKey } = useParams();
    useEffect(() => {
-      if (singleData.length > 0) {
-         const card = singleData.find(
+      if (singlePostData.length > 0) {
+         const card = singlePostData.find(
             (sinData) => sinData._id === SingleOrderKey
          );
          setRegister(card);
       }
-   }, [singleData]);
+   }, [singlePostData]);
 
    //** Data Submit in DataBase */
    const submitHandler = () => {
