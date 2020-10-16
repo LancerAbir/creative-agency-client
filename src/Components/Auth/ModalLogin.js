@@ -23,7 +23,7 @@ Modal.setAppElement("#root");
 
 const ModalLogin = () => {
    //** Data Come Form Context API */
-   const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+   const { loggedInUser, setLoggedInUser } = useContext(UserContext);
 
    const [modalIsOpen, setIsOpen] = useState(false);
    const openModal = () => {

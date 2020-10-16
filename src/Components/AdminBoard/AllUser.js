@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useState } from "react";
 import { UserContext } from "../../App";
 import AdminSidebar from "./AdminSidebar";
@@ -6,32 +6,17 @@ import SingleUser from "./SingleUser";
 
 const AllUser = () => {
    //** Data Come Form Context API */
-   const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+   const { loggedInUser, setLoggedInUser } = useContext(UserContext);
 
-   //** UseState */
-   const [userInfo, setUserInfo] = useState([
-      {
-         name: "lancer Abir",
-         email: "anjan.o24@gmail.com",
-         service: "Graphic Design",
-         description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      },
-      {
-         name: "Sufi Ahmed Hamim",
-         email: "sufi@gmail.com",
-         service: "Wev Design",
-         description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      },
-      {
-         name: "Abir Kumar",
-         email: "kumar@gmail.com",
-         service: "Wev Developer",
-         description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      },
-   ]);
+   //** Get Data Come From Server */
+   const [userInfo, setUserInfo] = useState([]);
+   useEffect(() => {
+      fetch("http://localhost:7000/sService")
+         .then((res) => res.json())
+         .then((data) => {
+            setUserInfo(data);
+         });
+   }, []);
 
    return (
       <div className="board-bg">

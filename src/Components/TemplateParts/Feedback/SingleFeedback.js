@@ -5,14 +5,14 @@ const SingleFeedback = ({ feedBack }) => {
       <div className="col-md-4 col-sm-6 col-12 ">
          <div className="single-feedback">
             <div className="feedback-img d-inline-flex">
-               <img src={feedBack.customerImg} alt="" />
+               <img src={feedBack.photo} alt="" />
                <div className="feedback-content">
-                  <h3>{feedBack.name}</h3>
-                  <h5>{feedBack.surname}</h5>
+                  <h3>{feedBack.fastName}</h3>
+                  <h5>{feedBack.companyName}</h5>
                </div>
             </div>
             <div className="feedback-comments"></div>
-            <p>{feedBack.comments}</p>
+            <p>{feedBack.personalDescription}</p>
          </div>
       </div>
    );

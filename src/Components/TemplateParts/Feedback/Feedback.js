@@ -1,37 +1,17 @@
-import React from "react";
-
-//** Import Service Image  */
-import feedbackCustomer01 from "../../../images/customer-1.png";
-import feedbackCustomer02 from "../../../images/customer-2.png";
-import feedbackCustomer03 from "../../../images/customer-3.png";
+import React, { useEffect, useState } from "react";
 import SingleFeedback from "./SingleFeedback";
 
-//** Feedback Temporary Data  */
-const feedbackData = [
-   {
-      customerImg: feedbackCustomer01,
-      name: "Nash Patrik",
-      surname: "CEO, Manpol",
-      comments:
-         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus commodo ipsum duis laoreet maecenas. Feugiat ",
-   },
-   {
-      customerImg: feedbackCustomer02,
-      name: "Miriam Barron",
-      surname: "CEO, Manpol",
-      comments:
-         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus commodo ipsum duis laoreet maecenas. Feugiat ",
-   },
-   {
-      customerImg: feedbackCustomer03,
-      name: "Bria Malone",
-      surname: "CEO, Manpol",
-      comments:
-         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus commodo ipsum duis laoreet maecenas. Feugiat ",
-   },
-];
-
 const Feedback = () => {
+   //** Get Data Come From Server */
+   const [feedbackData, setFeedbackData] = useState([]);
+   useEffect(() => {
+      fetch("http://localhost:7000/showFeedback")
+         .then((res) => res.json())
+         .then((data) => {
+            setFeedbackData(data);
+         });
+   }, []);
+
    return (
       <div className="feedback-section">
          <div className="row">

@@ -24,7 +24,10 @@ const Services = () => {
                </div>
             </div>
             {serviceAllData.map((service) => (
-               <SingleService service={service}> </SingleService>
+               <SingleService
+                  key={service._id}
+                  service={service}
+               ></SingleService>
             ))}
          </div>
       </div>

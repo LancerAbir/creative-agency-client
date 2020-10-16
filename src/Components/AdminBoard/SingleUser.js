@@ -4,9 +4,9 @@ const SingleUser = ({ userIn }) => {
    return (
       <tbody>
          <tr>
-            <td> {userIn.name} </td>
+            <td> {userIn.fastName} </td>
             <td> {userIn.email} </td>
-            <td> {userIn.service} </td>
+            <td> {userIn.title} </td>
             <td> {userIn.description} </td>
             <td>
                <select class="custom-select" id="inputGroupSelect01">

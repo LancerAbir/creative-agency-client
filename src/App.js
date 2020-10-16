@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import "./App.css";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 //** Import Components */
@@ -10,6 +10,7 @@ import NotFound from "./Components/Pages/NotFound";
 import AdminLogin from "./Components/Auth/AdminLogin";
 import UserLogin from "./Components/Auth/UserLogin";
 import PrivateRoute from "./Components/Pages/PrivateRoute";
+import PrivateRouteAdmin from "./Components/Pages/PrivateRouteAdmin";
 import Order from "./Components/UserBoard/Order";
 import ServiceList from "./Components/UserBoard/ServiceList";
 import Review from "./Components/UserBoard/Review";
@@ -20,10 +21,30 @@ import MakeAdmin from "./Components/AdminBoard/MakeAdmin";
 //** Context API */
 export const UserContext = createContext();
 
-function App() {
+const App = ({ children }) => {
+   //** Single Service Data Come From Server */
+   const [singleData, setSingleData] = useState([]);
+   const [user, setUser] = useState({});
+   useEffect(() => {
+      fetch("http://localhost:7000/service")
+         .then((res) => res.json())
+         .then((data) => setSingleData(data));
+   }, []);
+
+   //** Multiple ContextAPI */
    const [loggedInUser, setLoggedInUser] = useState({});
+
    return (
-      <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
+      <UserContext.Provider
+         value={{
+            loggedInUser,
+            setLoggedInUser,
+            singleData,
+            setSingleData,
+            user,
+            setUser,
+         }}
+      >
          <div className="App">
             <BrowserRouter>
                <Switch>
@@ -43,22 +64,22 @@ function App() {
                      <Review></Review>
                   </PrivateRoute>
 
-                  {/**  PrivateRoute  */}
-                  <PrivateRoute path="/allUser">
+                  {/**  Admin PrivateRouteAdmin  */}
+                  <PrivateRouteAdmin path="/allUser">
                      <AllUser></AllUser>
-                  </PrivateRoute>
-                  <PrivateRoute path="/addService">
+                  </PrivateRouteAdmin>
+                  <PrivateRouteAdmin path="/addService">
                      <AddService></AddService>
-                  </PrivateRoute>
-                  <PrivateRoute path="/makeAdmin">
+                  </PrivateRouteAdmin>
+                  <PrivateRouteAdmin path="/makeAdmin">
                      <MakeAdmin></MakeAdmin>
-                  </PrivateRoute>
+                  </PrivateRouteAdmin>
                   <Route path="*" component={NotFound} />
                </Switch>
             </BrowserRouter>
          </div>
       </UserContext.Provider>
    );
-}
+};
 
 export default App;

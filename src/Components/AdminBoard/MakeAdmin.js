@@ -1,10 +1,37 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 import { UserContext } from "../../App";
 import AdminSidebar from "./AdminSidebar";
 
 const MakeAdmin = () => {
    //** Data Come Form Context API */
-   const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+   const { loggedInUser, setLoggedInUser } = useContext(UserContext);
+
+   //** Description & Price Value */
+   const [addAdmin, setAddAdmin] = useState({});
+   const handleBlur = (e) => {
+      const newInfo = { ...addAdmin };
+      newInfo[e.target.name] = e.target.value;
+      setAddAdmin(newInfo);
+   };
+
+   //** Data Send in Database */
+   const submitHandler = () => {
+      const newAdmin = { ...addAdmin };
+
+      fetch("http://localhost:7000/addAdmin", {
+         method: "POST",
+         headers: {
+            "Content-Type": "application/json",
+         },
+         body: JSON.stringify(newAdmin),
+      })
+         .then((res) => res.json())
+         .then((data) => {
+            console.log(data);
+         });
+   };
+
    return (
       <div className="board-bg">
          <div className="container-fluid">
@@ -37,18 +64,22 @@ const MakeAdmin = () => {
                                        <div className="add-admin d-flex">
                                           <input
                                              type="email"
-                                             name="titleAdd"
                                              id="titleAdd"
+                                             name="email"
+                                             onBlur={handleBlur}
                                              required
                                              className="form-control"
                                              placeholder="jon@gamil.com"
                                           />
-                                          <button
-                                             type="submit"
-                                             className="add-submit btn btn-primary ml-auto"
-                                          >
-                                             Submit
-                                          </button>
+                                          <Link to="/makeAdmin">
+                                             <button
+                                                onClick={submitHandler}
+                                                type="submit"
+                                                className="add-submit btn btn-primary ml-auto"
+                                             >
+                                                Submit
+                                             </button>
+                                          </Link>
                                        </div>
                                     </div>
                                  </div>

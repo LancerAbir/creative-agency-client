@@ -3,17 +3,13 @@ import { useState } from "react";
 import { UserContext } from "../../App";
 import SingleServiceList from "./SingleServiceList";
 import UserSidebar from "./UserSidebar";
-
-import serviceImg01 from "../../images/icons/service1.png";
-import serviceImg02 from "../../images/icons/service2.png";
-import serviceImg03 from "../../images/icons/service3.png";
 import { useEffect } from "react";
 
 const ServiceList = () => {
    //** Data Come Form Context API */
-   const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+   const { loggedInUser, setLoggedInUser } = useContext(UserContext);
 
-   //** Get Data From Server */
+   //** Get Data Come From Server */
    const [serviceData, setServiceData] = useState([]);
    useEffect(() => {
       fetch("http://localhost:7000/sService")

@@ -1,13 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../App";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import UserSidebar from "./UserSidebar";
 import uploadIcon from "../../images/icons/cloud-upload-outline 1.png";
 
 const Order = () => {
    //** Data Come Form Context API */
-   const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+   const {
+      loggedInUser,
+      setLoggedInUser,
+      singleData,
+      setSingleData,
+   } = useContext(UserContext);
 
+   console.log(singleData);
    //** Logged User Info */
    const loggedName = loggedInUser.email && loggedInUser.fastName;
    const loggedEmail = loggedInUser.email && loggedInUser.email;
@@ -21,11 +27,11 @@ const Order = () => {
    };
 
    //** Single Service Data Come From Server */
-   const [singleData, setSingleData] = useState([]);
+   const [singlePostData, setSinglePostData] = useState([]);
    useEffect(() => {
       fetch("http://localhost:7000/service")
          .then((res) => res.json())
-         .then((data) => setSingleData(data));
+         .then((data) => setSinglePostData(data));
    }, []);
 
    //** Dynamic Key Single Place */
@@ -162,13 +168,15 @@ const Order = () => {
                                                 </div>
                                              </div>
 
-                                             <button
-                                                onClick={submitHandler}
-                                                type="submit"
-                                                class="section-btn"
-                                             >
-                                                Send
-                                             </button>
+                                             <Link to="/serviceList">
+                                                <button
+                                                   onClick={submitHandler}
+                                                   type="submit"
+                                                   class="section-btn"
+                                                >
+                                                   Send
+                                                </button>
+                                             </Link>
                                           </form>
                                        </div>
                                     </div>

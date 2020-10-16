@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import Footer from "../TemplateParts/Footer/Footer";
 import Navbar from "../TemplateParts/Headers/Navbar";
 

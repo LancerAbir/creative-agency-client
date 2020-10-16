@@ -6,7 +6,7 @@ import { useState } from "react";
 
 const AddService = () => {
    //** Data Come Form Context API */
-   const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+   const { loggedInUser, setLoggedInUser } = useContext(UserContext);
 
    //** input value */
    const [info, setInfo] = useState({});
