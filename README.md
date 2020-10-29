@@ -11,16 +11,16 @@ This is Landing Web page.
 
 ## Tecnology
 
-- 📫 React.js
-- 📫 React-Route
-- 📫 Context-API
-- 📫 React-Animation
-- 📫 Node.js
-- 📫 Express.js
-- 📫 MongoDB
-- 📫 Firebase-Auth
-- 📫 Firebase-Hosting
-- 📫 Heroku-Hosting
+- 📫  React.js
+- 📫  React-Route
+- 📫  Context-API
+- 📫  React-Animation
+- 📫  Node.js
+- 📫  Express.js
+- 📫  MongoDB
+- 📫  Firebase-Auth
+- 📫  Firebase-Hosting
+- 📫  Heroku-Hosting
 
 ## Feature
 
